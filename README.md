@@ -81,10 +81,10 @@ The project integrates API handling and browser automation. The API Handler retr
 
 Key libraries and tools include:
 
-Requests (for HTTP API calls)
-Random (for random selection)
-Selenium with webdriver-manager (for browser automation)
-Pillow (PIL) (for image processing)
-Datetime (for timestamping)
-Pytest (for testing)
+**Requests** (for HTTP API calls)
+**Random** (for random selection)
+**Selenium** with webdriver-manager (for browser automation)
+**Pillow** (PIL) (for image processing)
+**Datetime** (for timestamping)
+**Pytest** (for testing)
 This modular design ensures maintainability, ease of testing, and the flexibility to extend the project further.
