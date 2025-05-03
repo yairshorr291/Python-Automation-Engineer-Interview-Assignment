@@ -88,3 +88,51 @@ Key libraries and tools include:
 **Datetime** (for timestamping)
 **Pytest** (for testing)
 This modular design ensures maintainability, ease of testing, and the flexibility to extend the project further.
+
+
+**📁 Final Code Architecture**
+*main.py*
+*Orchestrates the overall flow of the project.*
+-Calls fetch_characters() to retrieve character data from the Rick and Morty API.
+-Passes the characters to process_characters() to handle automation tasks.
+-Prints the results (success or failure for each character).
+-Verifies if the two characters originate from the same location after automation (to ensure the process is not interrupted).
+
+*api_handler.py*
+*Handles all logic related to data fetching and processing from the Rick and Morty API.*
+Functions:
+-fetch_episodes, filter_episodes_with_characters, select_random_episode
+-fetch_character_details: retrieves full character data from their URLs
+-write_character_introduction: creates a text file introducing the characters
+-verify_locations: checks if both characters are from the same location
+-fetch_characters: manages the entire data fetching pipeline
+*Why it's separate: Makes it easier to test, mock, and debug API calls independently from the automation logic.*
+
+*automation_handler.py*
+*Handles browser automation using Selenium to search and capture character images from Google Images.*
+Functions:
+-init_driver: initializes Chrome in fullscreen
+-set_language_to_english: ensures Google is in English
+-go_to_google_images: navigates via the top-right “Images” button
+-verify_images_page: confirms that the browser is on Google Images
+-search_character_image: clears and searches the character
+-calculate_image_position: calculates index in the image grid
+-wait_for_image_load: checks that image is visible and loaded
+-capture_and_save_image: takes a screenshot of the image and saves it
+-process_characters: full automation loop over all selected characters
+*Why it's separate: It keeps the automation process clean, modular, and testable on its own.*
+
+*test_automation.py*
+*Contains all the Pytest-based unit and integration tests.*
+-Uses fixtures to set up and tear down the browser driver.
+-Every custom function is covered: from driver initialization to image capture and full process execution.
+-Allows simulation of success/failure cases.
+*Why it's separate: Keeps testing logic out of the main codebase. Supports test automation and CI/CD.*
+
+**💡 Why This Architecture?**
+-Separation of concerns: Each module has a single responsibility.
+-Maintainability: Easy to isolate and fix bugs.
+-Testability: Modules can be tested independently or as a whole.
+-Extensibility: Easy to add new features like multilingual support, advanced filtering, or machine learning models.
+-Clean code: Follows best practices for readability and reuse.
+
